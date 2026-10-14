@@ -1,0 +1,8 @@
+{
+  "name": "THE PENTAGON",
+  "description": "A Connected Digital Ecosystem for Smarter Learning bringing students, teachers, resources and classroom insights together.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile and institutional role definition",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "format": "email", "maxLength": 256 },
+        "name": { "type": "string", "maxLength": 128 },
+        "role": { "type": "string", "enum": ["student", "faculty", "school", "admin"] },
+        "institution": { "type": "string", "maxLength": 256 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "StudentData": {
+      "title": "StudentData",
+      "description": "Student academic store including portfolio, marks, and achievements",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "profile": { "type": "object" },
+        "about": { "type": "object" },
+        "marks": { "type": "array" },
+        "skills": { "type": "array" },
+        "ach": { "type": "array" },
+        "courses": { "type": "array" },
+        "done": { "type": "array" },
+        "days": { "type": "array" },
+        "events": { "type": "array" },
+        "goals": { "type": "array" },
+        "posts": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId"]
+    },
+    "Classroom": {
+      "title": "Classroom",
+      "description": "Academic classroom attendance, classes, and analytics",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "classes": { "type": "array" },
+        "attendance": { "type": "object" },
+        "leaderboard": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id"]
+    },
+    "Notice": {
+      "title": "Notice",
+      "description": "Institutional circular or departmental notice",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "dept": { "type": "string", "maxLength": 128 },
+        "date": { "type": "string" },
+        "priority": { "type": "string", "enum": ["normal", "urgent"] },
+        "desc": { "type": "string", "maxLength": 2048 },
+        "authorId": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["id", "title", "dept", "priority", "desc"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "System event and security telemetry log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "time": { "type": "string" },
+        "user": { "type": "string", "maxLength": 128 },
+        "action": { "type": "string", "maxLength": 256 },
+        "level": { "type": "string", "enum": ["info", "warn", "success"] }
+      },
+      "required": ["id", "time", "action", "level"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores user credentials, role and institutional affiliations"
+    },
+    "/students/{userId}": {
+      "schema": "StudentData",
+      "description": "Stores personal student portfolio and academic progression"
+    },
+    "/classrooms/{classroomId}": {
+      "schema": "Classroom",
+      "description": "Stores classroom attendance logs and schedule records"
+    },
+    "/notices/{noticeId}": {
+      "schema": "Notice",
+      "description": "Stores institutional notices and circulars"
+    },
+    "/audit_logs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Stores system security logs and audit entries"
+    }
+  }
+}

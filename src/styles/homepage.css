@@ -1,0 +1,1048 @@
+/* ==========================================================
+   THE PENTAGON - Homepage Enterprise Styles
+   Palette: Enterprise Navy (#0a192f, #0f172a, #1e293b),
+            Pure White (#ffffff, #f8fafc),
+            Restrained Cyan Accents (#0284c7, #06b6d4, #38bdf8)
+   ========================================================== */
+
+/* ---------- Container & Root ---------- */
+.hp-root {
+  min-height: 100vh;
+  position: relative;
+  background: #f8fafc;
+  color: #0f172a;
+  overflow-x: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.hp-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- 1. HERO SECTION (Balanced 2-Column Layout) ---------- */
+.hp-hero {
+  position: relative;
+  z-index: 2;
+  padding: 100px 0 60px;
+  min-height: auto;
+}
+
+.hp-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr);
+  gap: 40px;
+  align-items: start;
+}
+
+/* Left Column */
+.hp-hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+.hp-eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 6px 14px;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.28);
+  border-radius: 9999px;
+  color: #0284c7;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hp-eyebrow-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0284c7;
+  box-shadow: 0 0 8px #0284c7;
+  animation: hpPulse 2s infinite;
+}
+
+@keyframes hpPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.7); }
+  70% { transform: scale(1.15); box-shadow: 0 0 0 7px rgba(2, 132, 199, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(2, 132, 199, 0); }
+}
+
+.hp-hero-title {
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  font-size: clamp(2.2rem, 3.8vw, 3.3rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: 0.03em;
+  color: #0a192f;
+  margin: 0;
+}
+
+.hp-hero-title-highlight {
+  background: linear-gradient(135deg, #0284c7 0%, #0f172a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+}
+
+.hp-hero-subtitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0369a1;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.hp-hero-desc {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #334155;
+  margin: 0;
+  max-width: 580px;
+}
+
+.hp-hero-author {
+  font-size: 0.85rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hp-hero-author b {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* Primary and Secondary CTA Buttons */
+.hp-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.hp-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 26px;
+  border-radius: 10px;
+  background: #0a192f;
+  border: 1px solid #0284c7;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 8px 24px -6px rgba(10, 25, 47, 0.4);
+  transition: all 0.25s ease;
+}
+
+.hp-btn-primary:hover {
+  background: #0f2442;
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -6px rgba(2, 132, 199, 0.35);
+  color: #ffffff;
+}
+
+.hp-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 24px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1.5px solid #0284c7;
+  color: #0369a1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.1);
+  transition: all 0.25s ease;
+}
+
+.hp-btn-secondary:hover {
+  background: rgba(2, 132, 199, 0.06);
+  border-color: #0369a1;
+  color: #075985;
+  transform: translateY(-2px);
+}
+
+/* Quick Role Jump Pills */
+.hp-role-jumps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 14px 18px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04);
+}
+
+.hp-role-jumps-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hp-role-jumps-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hp-role-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hp-role-pill-btn:hover {
+  background: #0a192f;
+  border-color: #0284c7;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Trust Stats Bar */
+.hp-trust-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.hp-trust-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.hp-trust-num {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0a192f;
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.hp-trust-lbl {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Institutional Quote Box */
+.hp-quote-card {
+  margin-top: 4px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border-left: 3px solid #0284c7;
+  border-radius: 0 12px 12px 0;
+  border-top: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.hp-quote-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #0369a1;
+  margin-bottom: 6px;
+}
+
+.hp-quote-text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: #1e293b;
+  margin: 0;
+  min-height: 2.9em;
+}
+
+/* ---------- 2. RIGHT COLUMN: Education-Intelligence Dashboard Illustration ---------- */
+.hp-hero-right {
+  position: relative;
+}
+
+.hp-dashboard-mockup {
+  background: #091426;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(2, 14, 38, 0.5), 0 0 35px -10px rgba(2, 132, 199, 0.25);
+  overflow: hidden;
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mockup Window Header */
+.hp-dash-window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: #060e1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hp-dash-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.hp-dash-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.hp-dash-dot.red { background: #ef4444; }
+.hp-dash-dot.amber { background: #f59e0b; }
+.hp-dash-dot.green { background: #10b981; }
+
+.hp-dash-title {
+  font-size: 0.78rem;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hp-dash-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 3px 9px;
+  border-radius: 9999px;
+}
+
+.hp-dash-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: hpPulse 1.8s infinite;
+}
+
+/* Mockup Tabs */
+.hp-dash-nav-tabs {
+  display: flex;
+  background: #0a182f;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px 10px 0;
+  overflow-x: auto;
+}
+
+.hp-dash-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.hp-dash-tab:hover {
+  color: #e2e8f0;
+}
+
+.hp-dash-tab.active {
+  color: #38bdf8;
+  border-bottom-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.05);
+}
+
+/* Mockup Main Body */
+.hp-dash-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Module 1: Academic Insights */
+.hp-dash-module {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(56, 189, 248, 0.16);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hp-module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hp-module-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #38bdf8;
+}
+
+.hp-module-meta {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.hp-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.hp-kpi-card {
+  background: rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.hp-kpi-label {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.hp-kpi-val {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.hp-kpi-sub {
+  font-size: 0.7rem;
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* Discipline Progress Bars */
+.hp-subject-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hp-subj-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hp-subj-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  color: #cbd5e1;
+}
+
+.hp-subj-bar-bg {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.hp-subj-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0284c7, #38bdf8);
+}
+
+/* Module 2: Predictive Risk Indicators */
+.hp-risk-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 8px;
+}
+
+.hp-risk-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fcd34d;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.hp-risk-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #f59e0b;
+  color: #020617;
+}
+
+.hp-risk-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hp-risk-card-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  background: rgba(2, 6, 23, 0.6);
+  border-left: 3px solid #f59e0b;
+  border-radius: 6px;
+  font-size: 0.78rem;
+}
+
+.hp-risk-item-name {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.hp-risk-item-cause {
+  color: #94a3b8;
+  font-size: 0.72rem;
+}
+
+.hp-risk-badge {
+  font-size: 0.68rem;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* Module 3: Connected Classrooms */
+.hp-class-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hp-class-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #cbd5e1;
+}
+
+.hp-class-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.hp-class-rooms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hp-room-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(2, 6, 23, 0.5);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.hp-room-name {
+  font-weight: 600;
+  color: #f1f5f9;
+  font-size: 0.8rem;
+}
+
+.hp-room-instructor {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.hp-room-attendance {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+/* Mockup Footer Bar */
+.hp-dash-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: #060e1a;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.hp-dash-engine-tag {
+  color: #38bdf8;
+  font-family: monospace;
+}
+
+/* ---------- 3. PORTAL ACCESS SECTION (#access) ---------- */
+.hp-access-section {
+  position: relative;
+  z-index: 2;
+  padding: 80px 0 90px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+}
+
+.hp-section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 50px;
+}
+
+.hp-section-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #0284c7;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.hp-section-title {
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  color: #0a192f;
+  margin: 0 0 12px;
+}
+
+.hp-section-desc {
+  font-size: 1.02rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 4 Institutional Login Cards Grid */
+.hp-portals-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.hp-portal-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04);
+}
+
+.hp-portal-card:hover {
+  transform: translateY(-6px);
+  border-color: #0284c7;
+  box-shadow: 0 20px 35px -8px rgba(2, 132, 199, 0.18), 0 0 0 1px #0284c7;
+}
+
+.hp-portal-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.hp-portal-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0284c7;
+  transition: all 0.25s ease;
+}
+
+.hp-portal-card:hover .hp-portal-icon-box {
+  background: #0a192f;
+  color: #38bdf8;
+  border-color: #38bdf8;
+}
+
+.hp-portal-tier-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.hp-portal-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0a192f;
+  margin: 0 0 8px;
+}
+
+.hp-portal-desc {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #64748b;
+  margin: 0 0 18px;
+  flex: 1;
+}
+
+.hp-portal-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.hp-portal-features li {
+  font-size: 0.8rem;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.hp-portal-features li svg {
+  color: #0284c7;
+  flex-shrink: 0;
+}
+
+.hp-portal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 16px;
+  background: #0a192f;
+  border: 1px solid #0284c7;
+  border-radius: 9px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.hp-portal-btn:hover {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 6px 20px -4px rgba(2, 132, 199, 0.4);
+}
+
+/* ---------- 4. ABOUT & ARCHITECTURE SECTION (#about) ---------- */
+.hp-about-section {
+  position: relative;
+  z-index: 2;
+  padding: 80px 0;
+  background: #f8fafc;
+}
+
+.hp-about-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 44px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05);
+}
+
+.hp-about-copy h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0a192f;
+  margin: 0 0 14px;
+}
+
+.hp-about-copy p {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: #334155;
+  margin: 0 0 20px;
+}
+
+.hp-about-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.hp-about-pill {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.25);
+  color: #0284c7;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Architecture SVG Art */
+.hp-about-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- 5. BENEFITS SECTION (#benefits) ---------- */
+.hp-benefits-section {
+  position: relative;
+  z-index: 2;
+  padding: 80px 0 90px;
+  background: #ffffff;
+}
+
+.hp-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.hp-benefit-card {
+  padding: 26px 22px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.25s ease;
+}
+
+.hp-benefit-card:hover {
+  background: #ffffff;
+  border-color: #0284c7;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -6px rgba(2, 132, 199, 0.12);
+}
+
+.hp-benefit-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0284c7;
+}
+
+.hp-benefit-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #0a192f;
+  margin: 0;
+}
+
+.hp-benefit-desc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ---------- 6. FOOTER (#contact) ---------- */
+.hp-footer {
+  position: relative;
+  z-index: 2;
+  background: #0a192f;
+  color: #94a3b8;
+  padding: 36px 0;
+  border-top: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.hp-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.hp-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 0.85rem;
+}
+
+.hp-footer-left a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.hp-footer-left a:hover {
+  color: #38bdf8;
+}
+
+.hp-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.85rem;
+}
+
+.hp-footer-right a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.hp-footer-btn-intro {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #cbd5e1;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hp-footer-btn-intro:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border-color: #38bdf8;
+}
+
+/* ---------- Responsive Breakpoints ---------- */
+@media (max-width: 1080px) {
+  .hp-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .hp-portals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hp-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hp-about-box {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .hp-hero {
+    padding: 80px 0 40px;
+  }
+  .hp-portals-grid {
+    grid-template-columns: 1fr;
+  }
+  .hp-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  .hp-trust-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .hp-kpi-row {
+    grid-template-columns: 1fr;
+  }
+  .hp-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hp-btn-primary, .hp-btn-secondary {
+    width: 100%;
+  }
+  .hp-footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}

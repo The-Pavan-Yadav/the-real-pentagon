@@ -1,0 +1,74 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Default catch-all denies everything not explicitly allowed
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // User profiles & institutional affiliations
+    match /users/{userId} {
+      allow get: if isSignedIn();
+      allow list: if isSignedIn();
+      allow create: if isSignedIn() && isValidId(userId) && isOwner(userId);
+      allow update: if isSignedIn() && isValidId(userId) && isOwner(userId);
+      allow delete: if false;
+    }
+
+    // Student portfolio & academic data
+    match /students/{userId} {
+      allow get: if isSignedIn();
+      allow list: if isSignedIn();
+      allow create, update: if isSignedIn() && isValidId(userId);
+      allow delete: if false;
+    }
+
+    // Classrooms & lecture attendance
+    match /classrooms/{classroomId} {
+      allow get: if isSignedIn();
+      allow list: if isSignedIn();
+      allow create, update: if isSignedIn() && isValidId(classroomId);
+      allow delete: if false;
+    }
+
+    // Institutional circulars & notices
+    match /notices/{noticeId} {
+      allow get, list: if isSignedIn();
+      allow create, update: if isSignedIn() && isValidId(noticeId);
+      allow delete: if isSignedIn() && isValidId(noticeId);
+    }
+
+    // Security & administrative audit logs
+    match /audit_logs/{logId} {
+      allow get, list: if isSignedIn();
+      allow create: if isSignedIn() && isValidId(logId);
+      allow update, delete: if false;
+    }
+
+    // Connection testing
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+  }
+}
