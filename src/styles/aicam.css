@@ -1,0 +1,1331 @@
+/* ==========================================================
+   THE PENTAGON - AI Cam Styles
+   Color palette: Navy (#041b40, #0c1d3d, #081426), White (#ffffff), Cyan (#22d3ee, #38bdf8, #2563eb)
+   ========================================================== */
+
+/* TopNav AI Cam button */
+.nav-aicam-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  color: #0c1d3d;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(37, 99, 235, 0.12));
+  border: 1.5px solid rgba(34, 211, 238, 0.55);
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(34, 211, 238, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-aicam-btn:hover {
+  background: linear-gradient(135deg, #22d3ee, #2563eb);
+  color: #ffffff;
+  border-color: #22d3ee;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 211, 238, 0.45);
+}
+
+.nav-aicam-btn:active {
+  transform: translateY(0);
+}
+
+.aicam-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #06b6d4;
+  box-shadow: 0 0 8px #22d3ee;
+  animation: aicamPulse 2s infinite ease-in-out;
+}
+
+.nav-aicam-btn:hover .aicam-pulse-dot {
+  background-color: #ffffff;
+  box-shadow: 0 0 10px #ffffff;
+}
+
+@keyframes aicamPulse {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+    box-shadow: 0 0 14px #22d3ee;
+  }
+}
+
+/* Hero Section AI Cam Button */
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.hero-aicam-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #0c1d3d 0%, #041b40 100%);
+  color: #ffffff;
+  border: 1.5px solid #22d3ee;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(4, 27, 64, 0.35), 0 0 15px rgba(34, 211, 238, 0.25);
+  transition: all 0.25s ease;
+}
+
+.hero-aicam-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+  border-color: #67e8f9;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4), 0 0 25px rgba(34, 211, 238, 0.5);
+}
+
+.hero-aicam-badge {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  padding: 2px 7px;
+  background: rgba(34, 211, 238, 0.2);
+  color: #22d3ee;
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.hero-aicam-btn:hover .hero-aicam-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* ==========================================================
+   Full-Screen AI Cam Container
+   ========================================================== */
+.aicam-fullscreen-root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background-color: #030814;
+  color: #f8fafc;
+  font-family: var(--font-body, system-ui, sans-serif);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+  animation: aicamFadeIn 0.25s ease-out;
+}
+
+@keyframes aicamFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* AI Cam Header */
+.aicam-header {
+  height: 60px;
+  min-height: 60px;
+  background: rgba(4, 27, 64, 0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(34, 211, 238, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 30;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.aicam-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.aicam-brand-title {
+  font-family: var(--font-head, 'Orbitron', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aicam-brand-title span.accent {
+  color: #22d3ee;
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.6);
+}
+
+.aicam-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.aicam-status-pill.active {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+}
+
+.aicam-status-pill.paused {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+}
+
+.aicam-status-pill.idle {
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  color: #cbd5e1;
+}
+
+.aicam-status-pill.error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
+}
+
+.aicam-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.aicam-status-pill.active .aicam-status-dot {
+  animation: aicamPulse 1.6s infinite;
+}
+
+/* Classroom Banner in Header */
+.aicam-header-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.aicam-classroom-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(12, 29, 61, 0.85);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #e2e8f0;
+}
+
+.aicam-classroom-badge strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.aicam-classroom-badge .tag {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.aicam-classroom-badge .sep {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* Header Actions */
+.aicam-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aicam-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aicam-btn-ghost:hover {
+  background: rgba(34, 211, 238, 0.15);
+  border-color: rgba(34, 211, 238, 0.4);
+  color: #ffffff;
+}
+
+.aicam-btn-ghost.active {
+  background: rgba(34, 211, 238, 0.2);
+  border-color: #22d3ee;
+  color: #67e8f9;
+}
+
+.aicam-btn-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aicam-btn-close:hover {
+  background: rgba(239, 68, 68, 0.28);
+  border-color: rgba(239, 68, 68, 0.6);
+  color: #ffffff;
+}
+
+.aicam-kbd-hint {
+  display: inline-block;
+  font-size: 0.65rem;
+  padding: 1px 4px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+}
+
+/* ==========================================================
+   Main Workspace Layout
+   Split between Central Viewport and Intelligence Panel
+   ========================================================== */
+.aicam-workspace {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  background: #020611;
+}
+
+/* Viewport Area */
+.aicam-viewport-section {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #07152b 0%, #020612 85%);
+}
+
+.aicam-hud-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(34, 211, 238, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Video Stage */
+.aicam-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  aspect-ratio: 16 / 9;
+  max-height: calc(100vh - 145px);
+  background: #040d1a;
+  border: 1.5px solid rgba(34, 211, 238, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(34, 211, 238, 0.12);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* HTML Video Element */
+.aicam-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* mirror self-view for natural ergonomics */
+  display: block;
+}
+
+/* Detection Canvas & SVG Overlay */
+.aicam-detection-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Bounding Box Styling */
+.bbox-student {
+  position: absolute;
+  border: 2px solid #22d3ee;
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.4), inset 0 0 10px rgba(34, 211, 238, 0.1);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.bbox-student:hover {
+  border-color: #67e8f9;
+  background: rgba(34, 211, 238, 0.08);
+}
+
+.bbox-student .bbox-label {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  background: rgba(4, 27, 64, 0.95);
+  border: 1px solid #22d3ee;
+  border-radius: 4px;
+  color: #22d3ee;
+  font-family: var(--font-head, 'Orbitron', monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.bbox-student.assigned-staff {
+  border-color: #38bdf8;
+}
+
+.bbox-student.assigned-staff .bbox-label {
+  border-color: #38bdf8;
+  color: #e0f2fe;
+}
+
+/* Teacher Bounding Box */
+.bbox-teacher {
+  position: absolute;
+  border: 2.5px solid #f59e0b;
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.5), inset 0 0 14px rgba(245, 158, 11, 0.15);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.bbox-teacher .bbox-label {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  background: rgba(30, 20, 5, 0.95);
+  border: 1px solid #f59e0b;
+  border-radius: 4px;
+  color: #fbbf24;
+  font-family: var(--font-head, 'Orbitron', monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+/* Board Bounding Box */
+.bbox-board {
+  position: absolute;
+  border: 2px dashed #38bdf8;
+  border-radius: 6px;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+  pointer-events: auto;
+  background: rgba(56, 189, 248, 0.05);
+}
+
+.bbox-board .bbox-label {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(4, 27, 64, 0.9);
+  border: 1px solid #38bdf8;
+  border-radius: 4px;
+  color: #7dd3fc;
+  font-family: var(--font-head, 'Orbitron', monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Camera Standby View */
+.aicam-standby-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  z-index: 5;
+}
+
+.aicam-start-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5), 0 0 20px rgba(34, 211, 238, 0.4);
+  transition: all 0.25s ease;
+  margin-top: 18px;
+}
+
+.aicam-start-cta:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #22d3ee 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(37, 99, 235, 0.6), 0 0 28px rgba(34, 211, 238, 0.6);
+}
+
+/* Viewfinder HUD Overlays */
+.viewfinder-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: #22d3ee;
+  pointer-events: none;
+  filter: drop-shadow(0 0 4px #22d3ee);
+  z-index: 15;
+}
+
+.viewfinder-corner.top-left {
+  top: 12px;
+  left: 12px;
+  border-top: 3px solid #22d3ee;
+  border-left: 3px solid #22d3ee;
+  border-top-left-radius: 6px;
+}
+
+.viewfinder-corner.top-right {
+  top: 12px;
+  right: 12px;
+  border-top: 3px solid #22d3ee;
+  border-right: 3px solid #22d3ee;
+  border-top-right-radius: 6px;
+}
+
+.viewfinder-corner.bottom-left {
+  bottom: 12px;
+  left: 12px;
+  border-bottom: 3px solid #22d3ee;
+  border-left: 3px solid #22d3ee;
+  border-bottom-left-radius: 6px;
+}
+
+.viewfinder-corner.bottom-right {
+  bottom: 12px;
+  right: 12px;
+  border-bottom: 3px solid #22d3ee;
+  border-right: 3px solid #22d3ee;
+  border-bottom-right-radius: 6px;
+}
+
+/* Stage Floating Bar */
+.aicam-stage-hud-top {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.hud-pill {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(3, 10, 22, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  font-family: var(--font-head, 'Orbitron', monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+}
+
+.hud-pill strong {
+  color: #38bdf8;
+}
+
+/* Warning Pill for Low Light */
+.hud-pill.warning {
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+  background: rgba(30, 20, 5, 0.85);
+}
+
+/* ==========================================================
+   Live Intelligence Panel
+   ========================================================== */
+.aicam-intel-panel {
+  width: 340px;
+  min-width: 320px;
+  max-width: 380px;
+  background: rgba(4, 20, 48, 0.96);
+  backdrop-filter: blur(14px);
+  border-left: 1px solid rgba(34, 211, 238, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 25;
+  transition: transform 0.3s ease;
+}
+
+.intel-panel-header {
+  padding: 16px;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.intel-panel-title {
+  font-family: var(--font-head, 'Orbitron', sans-serif);
+  font-size: 0.86rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.intel-panel-title .pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 8px #22d3ee;
+}
+
+.intel-cards-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Intelligence Metric Card */
+.intel-card {
+  background: rgba(12, 29, 61, 0.65);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.intel-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Status Indicator Badges (Detected, Searching, Unavailable) */
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.badge-status.detected {
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  color: #34d399;
+}
+
+.badge-status.uncertain {
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+}
+
+.badge-status.unavailable {
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: #94a3b8;
+}
+
+/* People Counter Grid */
+.intel-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.intel-metric-box {
+  background: rgba(3, 10, 22, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 8px 6px;
+  text-align: center;
+}
+
+.intel-metric-box .val {
+  font-family: var(--font-head, 'Orbitron', monospace);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.intel-metric-box .label {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+/* Teacher Card Specific */
+.teacher-status-view {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(3, 10, 22, 0.5);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.teacher-avatar-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.teacher-details {
+  flex: 1;
+}
+
+.teacher-details .t-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+.teacher-details .t-sub {
+  font-size: 0.72rem;
+  color: #fbbf24;
+}
+
+/* Board Card Specific */
+.board-status-view {
+  background: rgba(3, 10, 22, 0.5);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.board-capture-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(37, 99, 235, 0.25));
+  border: 1px solid #22d3ee;
+  border-radius: 6px;
+  color: #e0f2fe;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.board-capture-cta:hover {
+  background: linear-gradient(135deg, #22d3ee, #2563eb);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(34, 211, 238, 0.35);
+}
+
+/* Student Association List */
+.student-assoc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.student-assoc-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: rgba(3, 10, 22, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  font-size: 0.76rem;
+}
+
+.student-assoc-row .assoc-btn {
+  background: transparent;
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  color: #38bdf8;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  cursor: pointer;
+}
+
+.student-assoc-row .assoc-btn:hover {
+  background: rgba(34, 211, 238, 0.2);
+}
+
+/* Camera Controls Bar (Bottom) */
+.aicam-controls-bar {
+  height: 64px;
+  min-height: 64px;
+  background: rgba(4, 27, 64, 0.98);
+  border-top: 1px solid rgba(34, 211, 238, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 30;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.control-group-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.control-group-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.control-group-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Primary Action Buttons in Controls */
+.btn-cam-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-cam-action.start {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+}
+
+.btn-cam-action.start:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  transform: translateY(-1px);
+}
+
+.btn-cam-action.pause {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+}
+
+.btn-cam-action.pause:hover {
+  background: rgba(245, 158, 11, 0.25);
+}
+
+.btn-cam-action.resume {
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  color: #ffffff;
+}
+
+.btn-cam-action.stop {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}
+
+.btn-cam-action.stop:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #ffffff;
+}
+
+.select-cam-input {
+  background: rgba(3, 10, 22, 0.7);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  border-radius: 6px;
+  color: #e2e8f0;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  outline: none;
+}
+
+/* ==========================================================
+   Board Content Extraction Modal
+   ========================================================== */
+.board-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 16, 0.88);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 50;
+  animation: aicamFadeIn 0.2s ease-out;
+}
+
+.board-modal-card {
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  background: linear-gradient(145deg, #071733 0%, #030d1e 100%);
+  border: 1.5px solid rgba(34, 211, 238, 0.4);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 30px rgba(34, 211, 238, 0.2);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.board-modal-header {
+  padding: 16px 22px;
+  background: rgba(4, 27, 64, 0.9);
+  border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.board-modal-header h3 {
+  font-family: var(--font-head, 'Orbitron', sans-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.board-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.board-crop-preview-wrap {
+  width: 100%;
+  max-height: 380px;
+  background: #020611;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.board-crop-preview {
+  max-width: 100%;
+  max-height: 380px;
+  object-fit: contain;
+}
+
+.board-notice-box {
+  background: rgba(12, 29, 61, 0.6);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.board-notice-box strong {
+  color: #38bdf8;
+}
+
+.board-modal-footer {
+  padding: 14px 22px;
+  background: rgba(4, 27, 64, 0.9);
+  border-top: 1px solid rgba(34, 211, 238, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ==========================================================
+   Staff Student Association Modal
+   ========================================================== */
+.assoc-modal-card {
+  width: 100%;
+  max-width: 440px;
+  background: #081630;
+  border: 1.5px solid #22d3ee;
+  border-radius: 12px;
+  padding: 24px;
+  color: #ffffff;
+}
+
+/* First-Time Setup Modal Styles */
+.aicam-setup-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 9, 20, 0.88);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 40;
+  animation: aicamFadeIn 0.25s ease-out;
+}
+
+.aicam-setup-card {
+  width: 100%;
+  max-width: 540px;
+  background: linear-gradient(145deg, #0a1b38 0%, #041228 100%);
+  border: 1.5px solid rgba(34, 211, 238, 0.4);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 30px rgba(34, 211, 238, 0.2);
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+  color: #ffffff;
+}
+
+.aicam-setup-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #22d3ee, #2563eb, transparent);
+}
+
+.aicam-setup-header {
+  margin-bottom: 26px;
+  text-align: center;
+}
+
+.aicam-setup-eyebrow {
+  font-family: var(--font-head, 'Orbitron', sans-serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  color: #22d3ee;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.aicam-setup-title {
+  font-family: var(--font-head, 'Orbitron', sans-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.aicam-setup-desc {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.aicam-form-group {
+  margin-bottom: 20px;
+}
+
+.aicam-form-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.aicam-form-label .required {
+  color: #22d3ee;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.aicam-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.aicam-chip {
+  padding: 6px 12px;
+  background: rgba(12, 29, 61, 0.7);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aicam-chip:hover {
+  background: rgba(34, 211, 238, 0.15);
+  border-color: rgba(34, 211, 238, 0.5);
+  color: #ffffff;
+}
+
+.aicam-chip.selected {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.25), rgba(37, 99, 235, 0.35));
+  border-color: #22d3ee;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.3);
+}
+
+.aicam-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(3, 10, 22, 0.7);
+  border: 1.5px solid rgba(59, 130, 246, 0.35);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.aicam-input:focus {
+  outline: none;
+  border-color: #22d3ee;
+  background: rgba(3, 10, 22, 0.9);
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.35);
+}
+
+.aicam-input::placeholder {
+  color: #64748b;
+}
+
+.aicam-input.has-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+.aicam-error-text {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: #f87171;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.aicam-setup-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.aicam-btn-save {
+  flex: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4), 0 0 15px rgba(34, 211, 238, 0.3);
+  transition: all 0.2s ease;
+}
+
+.aicam-btn-save:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #22d3ee 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5), 0 0 20px rgba(34, 211, 238, 0.5);
+}
+
+.aicam-btn-cancel {
+  flex: 1;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #cbd5e1;
+  border-radius: 8px;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aicam-btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+/* ==========================================================
+   Responsive Adaptations
+   ========================================================== */
+@media (max-width: 1024px) {
+  .aicam-workspace {
+    flex-direction: column;
+  }
+
+  .aicam-intel-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    height: 280px;
+    border-left: none;
+    border-top: 1px solid rgba(34, 211, 238, 0.2);
+  }
+
+  .aicam-stage {
+    max-height: calc(100vh - 420px);
+  }
+}
+
+@media (max-width: 768px) {
+  .aicam-header {
+    height: 52px;
+    min-height: 52px;
+    padding: 0 12px;
+  }
+
+  .aicam-brand-title {
+    font-size: 0.88rem;
+  }
+
+  .aicam-classroom-badge {
+    display: none;
+  }
+
+  .aicam-controls-bar {
+    height: auto;
+    min-height: 56px;
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .control-group-left, .control-group-center, .control-group-right {
+    width: 100%;
+    justify-content: center;
+  }
+}

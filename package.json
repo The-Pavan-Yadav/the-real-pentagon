@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@tabler/icons-react": "^3.49.0",
+    "@tensorflow-models/coco-ssd": "^2.2.3",
+    "@tensorflow/tfjs": "^4.22.0",
     "firebase": "^13.0.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",

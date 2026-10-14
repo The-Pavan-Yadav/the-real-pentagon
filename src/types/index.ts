@@ -8,6 +8,13 @@ export interface UserSession {
   t: number;
 }
 
+export interface ClassroomSetup {
+  className: string;
+  section: string;
+  roomNumber: string;
+  updatedAt?: number;
+}
+
 export interface StudentProfile {
   name: string;
   grade: string;

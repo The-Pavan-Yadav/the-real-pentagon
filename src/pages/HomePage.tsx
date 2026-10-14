@@ -2,42 +2,33 @@ import React, { useEffect, useState } from 'react';
 import { ThreeBrain } from '../components/ThreeBrain';
 import { TopNav } from '../components/TopNav';
 import { DemoModal } from '../components/DemoModal';
+import { AiCamView } from '../components/AiCamView';
 import { UserRole } from '../types';
-import {
-  IconArrowRight,
-  IconSparkles,
-  IconSchool,
-  IconChalkboard,
-  IconBuildingBank,
-  IconShieldLock,
-  IconActivity,
-  IconTrendingUp,
-  IconAlertTriangle,
-  IconCheck,
-  IconChartBar,
-  IconBroadcast,
-  IconLayersLinked,
-  IconUsers,
-  IconDeviceLaptop,
-  IconCalendar,
-} from '@tabler/icons-react';
 
 interface HomePageProps {
   onNavigateAuth: (role: UserRole, isSignup?: boolean) => void;
   onNavigatePortal: (view: string) => void;
-  onWatchIntro?: () => void;
+  initialAiCamOpen?: boolean;
 }
 
-type DashboardTab = 'composite' | 'insights' | 'risk' | 'classrooms';
-
-export const HomePage: React.FC<HomePageProps> = ({
-  onNavigateAuth,
-  onWatchIntro,
-}) => {
+export const HomePage: React.FC<HomePageProps> = ({ onNavigateAuth, initialAiCamOpen = false }) => {
   const [demoOpen, setDemoOpen] = useState(false);
+  const [aiCamOpen, setAiCamOpen] = useState(initialAiCamOpen);
   const [quoteIdx, setQuoteIdx] = useState(0);
   const [quoteFading, setQuoteFading] = useState(false);
-  const [activeTab, setActiveTab] = useState<DashboardTab>('composite');
+
+  // Sync if hash has aicam
+  useEffect(() => {
+    const handleHash = () => {
+      const h = window.location.hash.replace('#', '');
+      if (h === 'aicam' || h === 'ai-cam') {
+        setAiCamOpen(true);
+      }
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   const QUOTES = [
     'Education turns curiosity into capability, and capability into a brighter tomorrow.',
@@ -52,691 +43,387 @@ export const HomePage: React.FC<HomePageProps> = ({
       setTimeout(() => {
         setQuoteIdx((prev) => (prev + 1) % QUOTES.length);
         setQuoteFading(false);
-      }, 500);
-    }, 6500);
+      }, 700);
+    }, 7000);
 
     return () => clearInterval(timer);
   }, [QUOTES.length]);
 
   return (
-    <div className="hp-root">
-      {/* 3D Brain Background with restrained opacity */}
+    <div className="home-page-root" style={{ minHeight: '100vh', position: 'relative', overflowX: 'hidden' }}>
+      {/* 3D Brain Background */}
       <ThreeBrain />
 
       {/* Navigation */}
-      <TopNav onOpenDemo={() => setDemoOpen(true)} onNavigate={() => {}} />
+      <TopNav
+        onOpenDemo={() => setDemoOpen(true)}
+        onNavigate={() => {}}
+        onOpenAiCam={() => setAiCamOpen(true)}
+      />
 
       <main>
-        {/* ==================== 1. HERO SECTION (Balanced Two-Column Layout) ==================== */}
-        <section className="hp-hero" id="home">
-          <div className="hp-container">
-            <div className="hp-hero-grid">
-              
-              {/* ---------- LEFT COLUMN: Value Proposition & Institutional Controls ---------- */}
-              <div className="hp-hero-left">
-                {/* Eyebrow Status Badge */}
-                <div className="hp-eyebrow-badge">
-                  <span className="hp-eyebrow-pulse" aria-hidden="true" />
-                  <span>State & Institutional Education Platform // Tier-4</span>
-                </div>
+        {/* HERO */}
+        <section className="hero" id="home">
+          <div className="hero-inner">
+            <div className="hero-copy">
+              <span className="hero-eyebrow">A NEW DIMENSION IN EDUCATION</span>
+              <h1 className="brand">THE PENTAGON</h1>
+              <p className="powered">
+                An intelligent learning ecosystem
+                <span className="powered-divider">|</span>
+                by <b>NightBerrieZ</b>
+              </p>
+              <p className="hero-description">
+                Bringing students, educators and institutions together through connected learning,
+                meaningful insights and smarter digital experiences.
+              </p>
 
-                {/* Primary Brand & Balanced Heading */}
-                <div>
-                  <h1 className="hp-hero-title">
-                    THE PENTAGON
-                  </h1>
-                  <p className="hp-hero-subtitle">
-                    Unified Academic Intelligence & Connected Campus Infrastructure
-                  </p>
-                </div>
-
-                {/* Author & System Credential */}
-                <div className="hp-hero-author">
-                  <span>Engineered for institutional governance & student success</span>
-                  <span aria-hidden="true">•</span>
-                  <span>Powered by <b>NightBerrieZ</b></span>
-                </div>
-
-                {/* Value Description */}
-                <p className="hp-hero-desc">
-                  Bridging students, educators, and institutional leadership through unified telemetry,
-                  automated curriculum compliance, and predictive early-risk interventions across every
-                  connected classroom.
-                </p>
-
-                {/* Prominent Action Buttons */}
-                <div className="hp-cta-group">
-                  <a
-                    href="#access"
-                    className="hp-btn-primary"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      document.getElementById('access')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                  >
-                    <span>Explore Platform</span>
-                    <IconArrowRight size={18} aria-hidden="true" />
-                  </a>
-
-                  <button
-                    type="button"
-                    className="hp-btn-secondary"
-                    onClick={() => setDemoOpen(true)}
-                  >
-                    <IconSparkles size={18} aria-hidden="true" />
-                    <span>Request Demo</span>
-                  </button>
-                </div>
-
-                {/* Quick Role Direct Login Row */}
-                <div className="hp-role-jumps">
-                  <div className="hp-role-jumps-label">
-                    <IconShieldLock size={14} aria-hidden="true" />
-                    <span>Direct Institutional Portals</span>
-                  </div>
-                  <div className="hp-role-jumps-buttons">
-                    <button
-                      type="button"
-                      className="hp-role-pill-btn"
-                      onClick={() => onNavigateAuth('student')}
-                    >
-                      <IconSchool size={14} /> Students
-                    </button>
-                    <button
-                      type="button"
-                      className="hp-role-pill-btn"
-                      onClick={() => onNavigateAuth('faculty')}
-                    >
-                      <IconChalkboard size={14} /> Faculty
-                    </button>
-                    <button
-                      type="button"
-                      className="hp-role-pill-btn"
-                      onClick={() => onNavigateAuth('school')}
-                    >
-                      <IconBuildingBank size={14} /> School Admin
-                    </button>
-                    <button
-                      type="button"
-                      className="hp-role-pill-btn"
-                      onClick={() => onNavigateAuth('admin')}
-                    >
-                      <IconShieldLock size={14} /> Government Admin
-                    </button>
-                  </div>
-                </div>
-
-                {/* Trust Metrics Strip */}
-                <div className="hp-trust-strip">
-                  <div className="hp-trust-item">
-                    <span className="hp-trust-num">99.98%</span>
-                    <span className="hp-trust-lbl">System Uptime</span>
-                  </div>
-                  <div className="hp-trust-item">
-                    <span className="hp-trust-num">128+</span>
-                    <span className="hp-trust-lbl">Live Classrooms</span>
-                  </div>
-                  <div className="hp-trust-item">
-                    <span className="hp-trust-num">&lt;45ms</span>
-                    <span className="hp-trust-lbl">Sync Latency</span>
-                  </div>
-                  <div className="hp-trust-item">
-                    <span className="hp-trust-num">Zero-Trust</span>
-                    <span className="hp-trust-lbl">FERPA Compliant</span>
-                  </div>
-                </div>
-
-                {/* Institutional Quote Box */}
-                <div className="hp-quote-card">
-                  <div className="hp-quote-header">
-                    <span>Why Education Matters</span>
-                    <span style={{ fontSize: '0.68rem', opacity: 0.7 }}>Thought {quoteIdx + 1} of 4</span>
-                  </div>
-                  <blockquote
-                    className="hp-quote-text"
-                    style={{
-                      opacity: quoteFading ? 0 : 1,
-                      transition: 'opacity 0.4s ease',
-                    }}
-                  >
-                    "{QUOTES[quoteIdx]}"
-                  </blockquote>
-                </div>
+              <div className="quote-wrap">
+                <span className="quote-label">WHY EDUCATION MATTERS</span>
+                <blockquote
+                  className={`quote ${quoteFading ? 'fade' : ''}`}
+                  id="quote"
+                  style={{
+                    opacity: quoteFading ? 0 : 1,
+                    transition: 'opacity 0.7s ease',
+                  }}
+                >
+                  {QUOTES[quoteIdx]}
+                </blockquote>
               </div>
 
-              {/* ---------- RIGHT COLUMN: Polished Education-Intelligence Dashboard Illustration ---------- */}
-              <div className="hp-hero-right">
-                <div className="hp-dashboard-mockup" aria-label="Education-Intelligence Dashboard Preview">
-                  
-                  {/* Mockup Window Top Bar */}
-                  <div className="hp-dash-window-header">
-                    <div className="hp-dash-dots">
-                      <span className="hp-dash-dot red" />
-                      <span className="hp-dash-dot amber" />
-                      <span className="hp-dash-dot green" />
-                    </div>
-                    <div className="hp-dash-title">
-                      <IconActivity size={14} style={{ color: '#38bdf8' }} />
-                      <span>INSTITUTION: APEX CENTRAL UNIVERSITY // LIVE COMMAND</span>
-                    </div>
-                    <div className="hp-dash-status-badge">
-                      <span className="hp-dash-status-dot" />
-                      <span>LIVE TELEMETRY</span>
-                    </div>
-                  </div>
+              <div className="hero-cta-group">
+                <a
+                  href="#about"
+                  className="hero-explore"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Explore the platform <span aria-hidden="true">→</span>
+                </a>
 
-                  {/* Interactive Dashboard Tabs */}
-                  <div className="hp-dash-nav-tabs" role="tablist">
-                    <button
-                      type="button"
-                      role="tab"
-                      aria-selected={activeTab === 'composite'}
-                      className={`hp-dash-tab ${activeTab === 'composite' ? 'active' : ''}`}
-                      onClick={() => setActiveTab('composite')}
-                    >
-                      <IconLayersLinked size={15} />
-                      <span>Composite View</span>
-                    </button>
-                    <button
-                      type="button"
-                      role="tab"
-                      aria-selected={activeTab === 'insights'}
-                      className={`hp-dash-tab ${activeTab === 'insights' ? 'active' : ''}`}
-                      onClick={() => setActiveTab('insights')}
-                    >
-                      <IconChartBar size={15} />
-                      <span>Academic Insights</span>
-                    </button>
-                    <button
-                      type="button"
-                      role="tab"
-                      aria-selected={activeTab === 'risk'}
-                      className={`hp-dash-tab ${activeTab === 'risk' ? 'active' : ''}`}
-                      onClick={() => setActiveTab('risk')}
-                    >
-                      <IconAlertTriangle size={15} />
-                      <span>Predictive Risk (3)</span>
-                    </button>
-                    <button
-                      type="button"
-                      role="tab"
-                      aria-selected={activeTab === 'classrooms'}
-                      className={`hp-dash-tab ${activeTab === 'classrooms' ? 'active' : ''}`}
-                      onClick={() => setActiveTab('classrooms')}
-                    >
-                      <IconBroadcast size={15} />
-                      <span>Connected Rooms</span>
-                    </button>
-                  </div>
-
-                  {/* Mockup Body Content */}
-                  <div className="hp-dash-body">
-
-                    {/* 1. Academic Insights Section */}
-                    {(activeTab === 'composite' || activeTab === 'insights') && (
-                      <div className="hp-dash-module">
-                        <div className="hp-module-header">
-                          <div className="hp-module-tag">
-                            <IconTrendingUp size={16} />
-                            <span>Academic Insights & Proficiency</span>
-                          </div>
-                          <span className="hp-module-meta">Term: Fall 2026 // Week 9</span>
-                        </div>
-
-                        {/* KPI Cards Row */}
-                        <div className="hp-kpi-row">
-                          <div className="hp-kpi-card">
-                            <div className="hp-kpi-label">Institution Proficiency</div>
-                            <div className="hp-kpi-val">
-                              <span>94.6%</span>
-                              <span className="hp-kpi-sub">+3.4% YoY</span>
-                            </div>
-                          </div>
-                          <div className="hp-kpi-card">
-                            <div className="hp-kpi-label">Syllabus Progress</div>
-                            <div className="hp-kpi-val">
-                              <span>78.2%</span>
-                              <span className="hp-kpi-sub" style={{ color: '#38bdf8' }}>On-Track</span>
-                            </div>
-                          </div>
-                          <div className="hp-kpi-card">
-                            <div className="hp-kpi-label">Grade Health Index</div>
-                            <div className="hp-kpi-val">
-                              <span>A-Tier</span>
-                              <span className="hp-kpi-sub">Top 4%</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Discipline Progress Bars */}
-                        <div className="hp-subject-bars">
-                          <div className="hp-subj-item">
-                            <div className="hp-subj-info">
-                              <span>Computer Science & Distributed Systems</span>
-                              <span style={{ fontWeight: 600, color: '#38bdf8' }}>96.4% Completion</span>
-                            </div>
-                            <div className="hp-subj-bar-bg">
-                              <div className="hp-subj-bar-fill" style={{ width: '96.4%' }} />
-                            </div>
-                          </div>
-
-                          <div className="hp-subj-item">
-                            <div className="hp-subj-info">
-                              <span>Molecular Genetics & Bio-Engineering</span>
-                              <span style={{ fontWeight: 600, color: '#38bdf8' }}>91.8% Completion</span>
-                            </div>
-                            <div className="hp-subj-bar-bg">
-                              <div className="hp-subj-bar-fill" style={{ width: '91.8%' }} />
-                            </div>
-                          </div>
-
-                          <div className="hp-subj-item">
-                            <div className="hp-subj-info">
-                              <span>Quantitative Economics & Analytics</span>
-                              <span style={{ fontWeight: 600, color: '#38bdf8' }}>88.5% Completion</span>
-                            </div>
-                            <div className="hp-subj-bar-bg">
-                              <div className="hp-subj-bar-fill" style={{ width: '88.5%' }} />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* 2. Predictive Risk Indicators Section */}
-                    {(activeTab === 'composite' || activeTab === 'risk') && (
-                      <div className="hp-dash-module" style={{ borderColor: 'rgba(245, 158, 11, 0.3)' }}>
-                        <div className="hp-risk-banner">
-                          <div className="hp-risk-left">
-                            <IconAlertTriangle size={18} style={{ color: '#f59e0b' }} />
-                            <span>AI Predictive Early-Intervention Engine Active</span>
-                          </div>
-                          <span className="hp-risk-pill">3 Disengagements Flagged</span>
-                        </div>
-
-                        <div className="hp-risk-cards">
-                          <div className="hp-risk-card-item">
-                            <div>
-                              <div className="hp-risk-item-name">Aarav S. (Sem 4 CS)</div>
-                              <div className="hp-risk-item-cause">Missed 2 lab submissions • Attendance dip -12%</div>
-                            </div>
-                            <span className="hp-risk-badge">Peer Tutor Assigned</span>
-                          </div>
-
-                          <div className="hp-risk-card-item" style={{ borderLeftColor: '#0ea5e9' }}>
-                            <div>
-                              <div className="hp-risk-item-name">Meera P. (Sem 2 Genetics)</div>
-                              <div className="hp-risk-item-cause">Quiz 3 Outlier (&lt;58%) • Diagnostic scheduled</div>
-                            </div>
-                            <span className="hp-risk-badge">Faculty Review Sent</span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* 3. Connected Classrooms Section */}
-                    {(activeTab === 'composite' || activeTab === 'classrooms') && (
-                      <div className="hp-dash-module" style={{ borderColor: 'rgba(16, 185, 129, 0.3)' }}>
-                        <div className="hp-class-header">
-                          <div className="hp-class-stat">
-                            <span className="hp-class-live-dot" />
-                            <span style={{ fontWeight: 700, color: '#f8fafc' }}>128 Active Connected Classrooms</span>
-                          </div>
-                          <span style={{ fontSize: '0.74rem', color: '#10b981', fontWeight: 600 }}>
-                            Live Attendance: 96.8% (4,820 Present)
-                          </span>
-                        </div>
-
-                        <div className="hp-class-rooms-list">
-                          <div className="hp-room-row">
-                            <div>
-                              <div className="hp-room-name">Hall 4A // CS-401 Distributed Systems</div>
-                              <div className="hp-room-instructor">Instructor: Dr. Anand • Live Video Stream Active</div>
-                            </div>
-                            <div className="hp-room-attendance">
-                              <span>48/50</span>
-                              <span style={{ fontSize: '0.68rem', color: '#10b981' }}>● LIVE</span>
-                            </div>
-                          </div>
-
-                          <div className="hp-room-row">
-                            <div>
-                              <div className="hp-room-name">Lab 02 // CHEM-202 Organic Synthesis</div>
-                              <div className="hp-room-instructor">Instructor: Dr. Mukherjee • Practical Session</div>
-                            </div>
-                            <div className="hp-room-attendance">
-                              <span>32/32</span>
-                              <span style={{ fontSize: '0.68rem', color: '#10b981' }}>● LIVE</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Mockup Window Footer */}
-                  <div className="hp-dash-footer">
-                    <span>Sync: Sub-45ms Telemetry // TLS 1.3 Verified</span>
-                    <span className="hp-dash-engine-tag">Core Engine: Pentagon v4.2</span>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  className="hero-aicam-btn"
+                  id="hero-open-aicam"
+                  onClick={() => setAiCamOpen(true)}
+                  title="Launch The Pentagon AI Cam"
+                >
+                  <span className="aicam-pulse-dot" />
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                    <circle cx="12" cy="13" r="4" />
+                  </svg>
+                  <span>Launch AI Cam</span>
+                  <span className="hero-aicam-badge">LIVE HUB</span>
+                </button>
               </div>
+            </div>
 
+            <div className="hero-visual" aria-hidden="true">
+              <div className="hero-visual-glow" />
+              <div className="brain-caption">
+                <span className="brain-caption-dot" />
+                CONNECTING KNOWLEDGE
+              </div>
+            </div>
+          </div>
+
+          <a
+            className="scroll-cue"
+            href="#about"
+            aria-label="Scroll down"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <span />
+          </a>
+        </section>
+
+        {/* ABOUT */}
+        <section className="section about" id="about">
+          <div className="about-card in">
+            <div className="about-copy">
+              <span className="eyebrow">About the platform</span>
+              <h2 className="about-title">THE PENTAGON</h2>
+              <p className="about-text">
+                Where every student, teacher, resource, and classroom insight comes together—creating a
+                connected digital ecosystem built for smarter learning and better education.
+              </p>
+              <ul className="chips" aria-label="What connects on the platform">
+                <li>Students</li>
+                <li>Teachers</li>
+                <li>Resources</li>
+                <li>Insights</li>
+              </ul>
+            </div>
+            <div className="about-art" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <svg viewBox="0 0 460 300" width="100%" height="auto" style={{ maxWidth: '420px' }}>
+                <defs>
+                  <linearGradient id="netGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
+                    <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.8" />
+                  </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                    <feMerge>
+                      <feMergeNode in="coloredBlur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+                {/* Center Node */}
+                <circle cx="230" cy="150" r="48" fill="url(#netGrad)" filter="url(#glow)" />
+                <path d="M230 118 L260 138 L248 174 L212 174 L200 138 Z" fill="#ffffff" />
+                <text x="230" y="215" textAnchor="middle" fill="#0f172a" fontSize="13" fontWeight="bold" fontFamily="sans-serif">
+                  THE PENTAGON
+                </text>
+
+                {/* Connecting lines */}
+                <line x1="230" y1="150" x2="90" y2="70" stroke="#93c5fd" strokeWidth="2" strokeDasharray="4,4" />
+                <line x1="230" y1="150" x2="370" y2="70" stroke="#93c5fd" strokeWidth="2" strokeDasharray="4,4" />
+                <line x1="230" y1="150" x2="100" y2="230" stroke="#93c5fd" strokeWidth="2" strokeDasharray="4,4" />
+                <line x1="230" y1="150" x2="360" y2="230" stroke="#93c5fd" strokeWidth="2" strokeDasharray="4,4" />
+
+                {/* Satellite Nodes */}
+                <g transform="translate(90, 70)">
+                  <circle cx="0" cy="0" r="32" fill="#eff6ff" stroke="#3b82f6" strokeWidth="2" />
+                  <text x="0" y="4" textAnchor="middle" fill="#1e40af" fontSize="12" fontWeight="600">Students</text>
+                </g>
+                <g transform="translate(370, 70)">
+                  <circle cx="0" cy="0" r="32" fill="#eff6ff" stroke="#3b82f6" strokeWidth="2" />
+                  <text x="0" y="4" textAnchor="middle" fill="#1e40af" fontSize="12" fontWeight="600">Teachers</text>
+                </g>
+                <g transform="translate(100, 230)">
+                  <circle cx="0" cy="0" r="32" fill="#eff6ff" stroke="#3b82f6" strokeWidth="2" />
+                  <text x="0" y="4" textAnchor="middle" fill="#1e40af" fontSize="12" fontWeight="600">Resources</text>
+                </g>
+                <g transform="translate(360, 230)">
+                  <circle cx="0" cy="0" r="32" fill="#eff6ff" stroke="#3b82f6" strokeWidth="2" />
+                  <text x="0" y="4" textAnchor="middle" fill="#1e40af" fontSize="12" fontWeight="600">Insights</text>
+                </g>
+              </svg>
             </div>
           </div>
         </section>
 
-        {/* ==================== 2. PORTAL LOGINS SECTION (#access) ==================== */}
-        <section className="hp-access-section" id="access">
-          <div className="hp-container">
-            <header className="hp-section-header">
-              <span className="hp-section-eyebrow">Enterprise Role-Based Access</span>
-              <h2 className="hp-section-title">Institutional Portals</h2>
-              <p className="hp-section-desc">
-                Role-partitioned interfaces engineered to deliver precision data and workflows
-                tailored specifically for each tier of the educational ecosystem.
+        {/* PORTAL LOGINS */}
+        <section className="section access" id="access">
+          <div className="container">
+            <header className="section-head in">
+              <span className="eyebrow eyebrow-dark">Secure access</span>
+              <h2 className="section-title">Choose your portal</h2>
+              <p className="section-sub">
+                Sign in with the role that fits you. Each portal is tailored to what you need.
               </p>
             </header>
 
-            <div className="hp-portals-grid">
-              
-              {/* Card 1: Students */}
-              <article className="hp-portal-card">
-                <div className="hp-portal-card-top">
-                  <div className="hp-portal-icon-box">
-                    <IconSchool size={26} />
-                  </div>
-                  <span className="hp-portal-tier-tag">Tier 1 // Academic</span>
+            <div className="portal-grid">
+              {/* Student Portal */}
+              <article className="portal in" style={{ '--c1': '#2563eb', '--c2': '#1d4ed8' } as React.CSSProperties}>
+                <div className="portal-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 4 2 9l10 5 10-5-10-5z" />
+                    <path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5" />
+                    <path d="M22 9v6" />
+                  </svg>
                 </div>
-                <h3 className="hp-portal-title">Students Portal</h3>
-                <p className="hp-portal-desc">
-                  Centralized academic dashboard for course progress, syllabus tracking, digital submissions,
-                  and achievement metrics.
-                </p>
-                <ul className="hp-portal-features">
-                  <li><IconCheck size={14} /> Interactive timetable & calendar</li>
-                  <li><IconCheck size={14} /> Real-time syllabus completion tracker</li>
-                  <li><IconCheck size={14} /> Direct assignment file drop</li>
-                  <li><IconCheck size={14} /> Demo account: Aarav Sharma</li>
-                </ul>
+                <h3>Students Login</h3>
+                <p>Classes, resources, assignments and your learning progress in one place.</p>
                 <button
                   type="button"
-                  className="hp-portal-btn"
+                  className="btn-login"
                   onClick={() => onNavigateAuth('student')}
                 >
-                  <span>Student Sign In</span>
-                  <IconArrowRight size={16} />
+                  Login <span aria-hidden="true">→</span>
                 </button>
               </article>
 
-              {/* Card 2: Faculty */}
-              <article className="hp-portal-card">
-                <div className="hp-portal-card-top">
-                  <div className="hp-portal-icon-box">
-                    <IconChalkboard size={26} />
-                  </div>
-                  <span className="hp-portal-tier-tag">Tier 2 // Instruction</span>
+              {/* Faculty Portal */}
+              <article className="portal in" style={{ '--c1': '#2563eb', '--c2': '#1d4ed8' } as React.CSSProperties}>
+                <div className="portal-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="4" width="18" height="12" rx="2" />
+                    <path d="M12 16v4M8 20h8M7 12l3-3 3 2 4-4" />
+                  </svg>
                 </div>
-                <h3 className="hp-portal-title">Faculty Portal</h3>
-                <p className="hp-portal-desc">
-                  Curriculum management, automated classroom roll call, instant grading, and early
-                  intervention indicators.
-                </p>
-                <ul className="hp-portal-features">
-                  <li><IconCheck size={14} /> Real-time lecture attendance logging</li>
-                  <li><IconCheck size={14} /> Rapid gradebook & exam rubric assessment</li>
-                  <li><IconCheck size={14} /> Early-risk student identification</li>
-                  <li><IconCheck size={14} /> Demo account: Dr. Anand</li>
-                </ul>
+                <h3>Faculty Login</h3>
+                <p>Plan lessons, share material and understand your classroom at a glance.</p>
                 <button
                   type="button"
-                  className="hp-portal-btn"
+                  className="btn-login"
                   onClick={() => onNavigateAuth('faculty')}
                 >
-                  <span>Faculty Sign In</span>
-                  <IconArrowRight size={16} />
+                  Login <span aria-hidden="true">→</span>
                 </button>
               </article>
 
-              {/* Card 3: School Administration */}
-              <article className="hp-portal-card">
-                <div className="hp-portal-card-top">
-                  <div className="hp-portal-icon-box">
-                    <IconBuildingBank size={26} />
-                  </div>
-                  <span className="hp-portal-tier-tag">Tier 3 // Governance</span>
+              {/* School Admin Portal */}
+              <article className="portal in" style={{ '--c1': '#2563eb', '--c2': '#1d4ed8' } as React.CSSProperties}>
+                <div className="portal-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 21h18M5 21V9l7-5 7 5v12" />
+                    <path d="M9 21v-6h6v6M9 11h.01M15 11h.01" />
+                  </svg>
                 </div>
-                <h3 className="hp-portal-title">School Administration</h3>
-                <p className="hp-portal-desc">
-                  Campus-wide governance, teacher deployment, accreditation compliance audits, and
-                  institutional resource allocation.
-                </p>
-                <ul className="hp-portal-features">
-                  <li><IconCheck size={14} /> Departmental budget & asset monitoring</li>
-                  <li><IconCheck size={14} /> Teacher qualification & accreditation audits</li>
-                  <li><IconCheck size={14} /> Campus security & facility health sync</li>
-                  <li><IconCheck size={14} /> Demo account: Principal Reynolds</li>
-                </ul>
+                <h3>School Administration Login</h3>
+                <p>Oversee departments, people and institution-wide performance.</p>
                 <button
                   type="button"
-                  className="hp-portal-btn"
+                  className="btn-login"
                   onClick={() => onNavigateAuth('school')}
                 >
-                  <span>Admin Sign In</span>
-                  <IconArrowRight size={16} />
+                  Login <span aria-hidden="true">→</span>
                 </button>
               </article>
 
-              {/* Card 4: Government Administration */}
-              <article className="hp-portal-card">
-                <div className="hp-portal-card-top">
-                  <div className="hp-portal-icon-box">
-                    <IconShieldLock size={26} />
-                  </div>
-                  <span className="hp-portal-tier-tag">Tier 4 // State Oversight</span>
+              {/* Admin Portal */}
+              <article className="portal in" style={{ '--c1': '#2563eb', '--c2': '#1d4ed8' } as React.CSSProperties}>
+                <div className="portal-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
                 </div>
-                <h3 className="hp-portal-title">Government Admin</h3>
-                <p className="hp-portal-desc">
-                  Macro-level education department oversight, state-wide learning benchmarks, and
-                  regulatory compliance dashboards.
-                </p>
-                <ul className="hp-portal-features">
-                  <li><IconCheck size={14} /> Cross-district comparative benchmarks</li>
-                  <li><IconCheck size={14} /> State scholarship & grant disbursements</li>
-                  <li><IconCheck size={14} /> Zero-trust role & policy provisioning</li>
-                  <li><IconCheck size={14} /> Demo account: State Director</li>
-                </ul>
+                <h3>Admin Login</h3>
+                <p>Platform control, access management and system-level configuration.</p>
                 <button
                   type="button"
-                  className="hp-portal-btn"
+                  className="btn-login"
                   onClick={() => onNavigateAuth('admin')}
                 >
-                  <span>Govt Sign In</span>
-                  <IconArrowRight size={16} />
+                  Login <span aria-hidden="true">→</span>
                 </button>
               </article>
-
             </div>
           </div>
         </section>
 
-        {/* ==================== 3. ABOUT & ARCHITECTURE SECTION (#about) ==================== */}
-        <section className="hp-about-section" id="about">
-          <div className="hp-container">
-            <div className="hp-about-box">
-              <div className="hp-about-copy">
-                <span className="hp-section-eyebrow">Enterprise Topology</span>
-                <h3>The Pentagon Network Architecture</h3>
-                <p>
-                  Every participant in the educational journey—from learners and instructional faculty
-                  to campus leadership and state regulators—is synchronized within a single, secure,
-                  low-latency telemetry loop.
-                </p>
-                <p>
-                  Built on a distributed cloud backbone with immutable audit logging, automated
-                  intervention protocols, and sub-50ms data replication across connected classrooms.
-                </p>
-                <div className="hp-about-pills">
-                  <span className="hp-about-pill">Students</span>
-                  <span className="hp-about-pill">Faculty</span>
-                  <span className="hp-about-pill">School Governance</span>
-                  <span className="hp-about-pill">State Regulators</span>
-                  <span className="hp-about-pill">Live Telemetry</span>
+        {/* BENEFITS */}
+        <section className="section benefits" id="benefits">
+          <div className="container benefits-grid">
+            <div className="benefits-copy">
+              <header className="in">
+                <span className="eyebrow eyebrow-dark">Benefits</span>
+                <h2 className="section-title">Why institutions choose THE PENTAGON</h2>
+              </header>
+
+              <ol className="benefit-list">
+                <li className="in">
+                  <span className="badge">1</span>
+                  <div>
+                    <h3>One connected campus</h3>
+                    <p>Students, teachers, resources and records live in a single digital ecosystem.</p>
+                  </div>
+                </li>
+                <li className="in">
+                  <span className="badge">2</span>
+                  <div>
+                    <h3>Classroom insights in real time</h3>
+                    <p>Clear, actionable views of engagement, attendance and progress.</p>
+                  </div>
+                </li>
+                <li className="in">
+                  <span className="badge">3</span>
+                  <div>
+                    <h3>Less paperwork, more teaching</h3>
+                    <p>Everyday administrative tasks become simple, fast and organised.</p>
+                  </div>
+                </li>
+                <li className="in">
+                  <span className="badge">4</span>
+                  <div>
+                    <h3>Secure, role-based access</h3>
+                    <p>Every person sees exactly what they need, and nothing more.</p>
+                  </div>
+                </li>
+                <li className="in">
+                  <span className="badge">5</span>
+                  <div>
+                    <h3>Learning that goes beyond the classroom</h3>
+                    <p>Resources and support are available whenever learners need them.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <div className="benefits-art in" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div
+                style={{
+                  background: 'linear-gradient(135deg, #1e293b, #0f172a)',
+                  borderRadius: '16px',
+                  padding: '24px',
+                  width: '100%',
+                  maxWidth: '440px',
+                  color: '#fff',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.25)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                  <span style={{ fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#94a3b8' }}>
+                    Institutional Dashboard
+                  </span>
+                  <span style={{ fontSize: '11px', background: '#10b981', color: '#fff', padding: '3px 8px', borderRadius: '12px', fontWeight: 'bold' }}>
+                    LIVE
+                  </span>
                 </div>
-              </div>
-
-              {/* Architecture SVG Art */}
-              <div className="hp-about-art">
-                <svg viewBox="0 0 460 300" width="100%" height="auto" style={{ maxWidth: '420px' }}>
-                  <defs>
-                    <linearGradient id="netGrad" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#0a192f" />
-                      <stop offset="100%" stopColor="#0284c7" />
-                    </linearGradient>
-                    <filter id="glow">
-                      <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                      <feMerge>
-                        <feMergeNode in="coloredBlur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  
-                  {/* Central Core Pentagon Node */}
-                  <circle cx="230" cy="150" r="48" fill="url(#netGrad)" filter="url(#glow)" />
-                  <path d="M230 118 L260 138 L248 174 L212 174 L200 138 Z" fill="#ffffff" />
-                  <text x="230" y="215" textAnchor="middle" fill="#0f172a" fontSize="12" fontWeight="700" fontFamily="sans-serif">
-                    PENTAGON CORE
-                  </text>
-
-                  {/* Connecting Links */}
-                  <line x1="230" y1="150" x2="90" y2="70" stroke="#0284c7" strokeWidth="2" strokeDasharray="4,4" />
-                  <line x1="230" y1="150" x2="370" y2="70" stroke="#0284c7" strokeWidth="2" strokeDasharray="4,4" />
-                  <line x1="230" y1="150" x2="100" y2="230" stroke="#0284c7" strokeWidth="2" strokeDasharray="4,4" />
-                  <line x1="230" y1="150" x2="360" y2="230" stroke="#0284c7" strokeWidth="2" strokeDasharray="4,4" />
-
-                  {/* Satellite Nodes */}
-                  <g transform="translate(90, 70)">
-                    <circle cx="0" cy="0" r="32" fill="#f0f9ff" stroke="#0284c7" strokeWidth="2" />
-                    <text x="0" y="4" textAnchor="middle" fill="#0369a1" fontSize="11" fontWeight="700">Students</text>
-                  </g>
-                  <g transform="translate(370, 70)">
-                    <circle cx="0" cy="0" r="32" fill="#f0f9ff" stroke="#0284c7" strokeWidth="2" />
-                    <text x="0" y="4" textAnchor="middle" fill="#0369a1" fontSize="11" fontWeight="700">Faculty</text>
-                  </g>
-                  <g transform="translate(100, 230)">
-                    <circle cx="0" cy="0" r="32" fill="#f0f9ff" stroke="#0284c7" strokeWidth="2" />
-                    <text x="0" y="4" textAnchor="middle" fill="#0369a1" fontSize="11" fontWeight="700">Institutions</text>
-                  </g>
-                  <g transform="translate(360, 230)">
-                    <circle cx="0" cy="0" r="32" fill="#f0f9ff" stroke="#0284c7" strokeWidth="2" />
-                    <text x="0" y="4" textAnchor="middle" fill="#0369a1" fontSize="11" fontWeight="700">Analytics</text>
-                  </g>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ==================== 4. BENEFITS SECTION (#benefits) ==================== */}
-        <section className="hp-benefits-section" id="benefits">
-          <div className="hp-container">
-            <header className="hp-section-header">
-              <span className="hp-section-eyebrow">Enterprise Pillars</span>
-              <h2 className="hp-section-title">Why Leading Institutions Choose The Pentagon</h2>
-              <p className="hp-section-desc">
-                Engineered for maximum reliability, cross-tier compliance, and tangible academic growth.
-              </p>
-            </header>
-
-            <div className="hp-benefits-grid">
-              <div className="hp-benefit-card">
-                <span className="hp-benefit-num">01 // TELEMETRY</span>
-                <h3 className="hp-benefit-title">One Connected Campus</h3>
-                <p className="hp-benefit-desc">
-                  Students, teachers, courseware, and institutional records coalesce into a unified,
-                  high-security digital ecosystem without siloed fragmentation.
-                </p>
-              </div>
-
-              <div className="hp-benefit-card">
-                <span className="hp-benefit-num">02 // PREDICTION</span>
-                <h3 className="hp-benefit-title">Real-Time Risk Intervention</h3>
-                <p className="hp-benefit-desc">
-                  Early alerts automatically highlight struggling learners before performance drops become
-                  irreversible, triggering timely tutor and counselor interventions.
-                </p>
-              </div>
-
-              <div className="hp-benefit-card">
-                <span className="hp-benefit-num">03 // AUTOMATION</span>
-                <h3 className="hp-benefit-title">Paperless Administrative Efficiency</h3>
-                <p className="hp-benefit-desc">
-                  Automated attendance capture, standardized rubric grading, and digitized syllabus
-                  completion reduce routine administrative overhead by over 60%.
-                </p>
-              </div>
-
-              <div className="hp-benefit-card">
-                <span className="hp-benefit-num">04 // COMPLIANCE</span>
-                <h3 className="hp-benefit-title">Zero-Trust Role Partitioning</h3>
-                <p className="hp-benefit-desc">
-                  Granular, role-based cryptographic isolation ensures that sensitive student records,
-                  faculty appraisals, and governance data remain strictly confidential.
-                </p>
-              </div>
-
-              <div className="hp-benefit-card">
-                <span className="hp-benefit-num">05 // ACCESSIBILITY</span>
-                <h3 className="hp-benefit-title">Anytime, Anywhere Learning</h3>
-                <p className="hp-benefit-desc">
-                  Responsive design, offline-capable storage, and sub-50ms synchronizations ensure students
-                  and faculty maintain full access across desktop, tablet, and mobile.
-                </p>
-              </div>
-
-              <div className="hp-benefit-card">
-                <span className="hp-benefit-num">06 // OVERSIGHT</span>
-                <h3 className="hp-benefit-title">State-Level Accreditation Audits</h3>
-                <p className="hp-benefit-desc">
-                  Government administrators can audit institution-wide performance metrics, resource
-                  allocations, and compliance standards with one click.
-                </p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '14px', marginBottom: '20px' }}>
+                  <div style={{ background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '10px' }}>
+                    <small style={{ color: '#94a3b8', fontSize: '12px' }}>Attendance Rate</small>
+                    <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#38bdf8', marginTop: '4px' }}>96.8%</div>
+                  </div>
+                  <div style={{ background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '10px' }}>
+                    <small style={{ color: '#94a3b8', fontSize: '12px' }}>Resource Engagement</small>
+                    <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#a855f7', marginTop: '4px' }}>88.4%</div>
+                  </div>
+                </div>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '6px', color: '#cbd5e1' }}>
+                    <span>Syllabus Completion</span>
+                    <span>78%</span>
+                  </div>
+                  <div style={{ height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div style={{ width: '78%', height: '100%', background: 'linear-gradient(90deg, #3b82f6, #06b6d4)' }} />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
       </main>
 
-      {/* ==================== 5. FOOTER (#contact) ==================== */}
-      <footer className="hp-footer" id="contact">
-        <div className="hp-container">
-          <div className="hp-footer-inner">
-            <div className="hp-footer-left">
-              <span>© {new Date().getFullYear()} The Pentagon Platform</span>
-              <a href="#privacy" onClick={(e) => e.preventDefault()}>Privacy Policy</a>
-              <a href="#terms" onClick={(e) => e.preventDefault()}>Terms of Service</a>
-              <a href="#security" onClick={(e) => e.preventDefault()}>Security &amp; FERPA</a>
-            </div>
-
-            <div className="hp-footer-right">
-              {onWatchIntro && (
-                <button
-                  type="button"
-                  className="hp-footer-btn-intro"
-                  onClick={onWatchIntro}
-                >
-                  Watch 3D Intro
-                </button>
-              )}
-              <span>Architected &amp; Powered by <a href="mailto:contact@nightberries.com">NightBerrieZ</a></span>
-            </div>
+      {/* FOOTER */}
+      <footer className="footer" id="contact">
+        <div className="footer-inner">
+          <nav className="footer-left" aria-label="Legal">
+            <a href="#privacy" onClick={(e) => e.preventDefault()}>Privacy Policy</a>
+            <a href="#terms" onClick={(e) => e.preventDefault()}>Terms of Use</a>
+          </nav>
+          <div className="footer-right">
+            <a href="mailto:contact@nightberries.com">Contact NightBerrieZ</a>
           </div>
         </div>
       </footer>
 
-      {/* Request Demo Pop-up Modal */}
+      {/* Request Demo Pop-up */}
       <DemoModal isOpen={demoOpen} onClose={() => setDemoOpen(false)} />
+
+      {/* Dedicated Full-Screen AI Cam Interface */}
+      {aiCamOpen && (
+        <AiCamView
+          onClose={() => {
+            setAiCamOpen(false);
+            if (window.location.hash === '#aicam' || window.location.hash === '#ai-cam') {
+              window.history.replaceState(null, '', window.location.pathname);
+            }
+          }}
+        />
+      )}
     </div>
   );
 };

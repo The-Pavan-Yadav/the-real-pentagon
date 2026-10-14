@@ -5,12 +5,109 @@ import {
   CalendarYearData,
   UserSession,
   UserRole,
+  ClassroomSetup,
 } from '../types';
+import { TeacherDesignation, StudentRosterEntry } from '../types/aicam';
 
 export const SESS_KEY = 'hx_session';
 export const STUDENT_KEY = 'hx_student_v2';
 export const CLASSROOM_KEY = 'hx_classroom_v1';
 export const PERSONAL_CALENDAR_KEY = 'hx_personal_v1';
+export const AI_CAM_SETUP_KEY = 'pentagon_aicam_setup_v1';
+export const AI_CAM_TEACHER_KEY = 'pentagon_aicam_teacher_v1';
+export const AI_CAM_ROSTER_ASSOC_KEY = 'pentagon_aicam_roster_assoc_v1';
+
+export function getAiCamSetup(): ClassroomSetup | null {
+  try {
+    const raw = localStorage.getItem(AI_CAM_SETUP_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveAiCamSetup(setup: ClassroomSetup): void {
+  try {
+    localStorage.setItem(AI_CAM_SETUP_KEY, JSON.stringify(setup));
+  } catch (e) {
+    console.error('AI Cam setup write error', e);
+  }
+}
+
+export function clearAiCamSetup(): void {
+  try {
+    localStorage.removeItem(AI_CAM_SETUP_KEY);
+  } catch (e) {
+    console.error('AI Cam setup remove error', e);
+  }
+}
+
+export function defaultTeacherDesignation(): TeacherDesignation {
+  return {
+    teacherName: 'Ms. Priya Nair',
+    subject: 'Mathematics',
+    detectionMode: 'zone',
+    zone: 'left-podium',
+    isDetected: false,
+  };
+}
+
+export function getAiCamTeacher(): TeacherDesignation {
+  try {
+    const raw = localStorage.getItem(AI_CAM_TEACHER_KEY);
+    return raw ? { ...defaultTeacherDesignation(), ...JSON.parse(raw) } : defaultTeacherDesignation();
+  } catch {
+    return defaultTeacherDesignation();
+  }
+}
+
+export function saveAiCamTeacher(teacher: TeacherDesignation): void {
+  try {
+    localStorage.setItem(AI_CAM_TEACHER_KEY, JSON.stringify(teacher));
+  } catch (e) {
+    console.error('AI Cam teacher write error', e);
+  }
+}
+
+export function getAiCamRosterAssociations(): Record<string, { id: string; name: string }> {
+  try {
+    const raw = localStorage.getItem(AI_CAM_ROSTER_ASSOC_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+export function saveAiCamRosterAssociations(associations: Record<string, { id: string; name: string }>): void {
+  try {
+    localStorage.setItem(AI_CAM_ROSTER_ASSOC_KEY, JSON.stringify(associations));
+  } catch (e) {
+    console.error('AI Cam roster assoc write error', e);
+  }
+}
+
+export function getClassroomRoster(): StudentRosterEntry[] {
+  return [
+    { id: 'st-01', name: 'Aarav Sharma', rollNo: '10-A-01', grade: 'Class 10' },
+    { id: 'st-02', name: 'Divya S.', rollNo: '10-A-02', grade: 'Class 10' },
+    { id: 'st-03', name: 'Rohan Mehra', rollNo: '10-A-03', grade: 'Class 10' },
+    { id: 'st-04', name: 'Ananya Roy', rollNo: '10-A-04', grade: 'Class 10' },
+    { id: 'st-05', name: 'Karthik P.', rollNo: '10-A-05', grade: 'Class 10' },
+    { id: 'st-06', name: 'Sneha Patel', rollNo: '10-A-06', grade: 'Class 10' },
+    { id: 'st-07', name: 'Vikram Aditya', rollNo: '10-A-07', grade: 'Class 10' },
+    { id: 'st-08', name: 'Meera Iyer', rollNo: '10-A-08', grade: 'Class 10' },
+  ];
+}
+
+export function getAvailableFacultyList(): { id: string; name: string; subject: string; department: string }[] {
+  return [
+    { id: 'fac-1', name: 'Ms. Priya Nair', subject: 'Mathematics', department: 'Senior Faculty' },
+    { id: 'fac-2', name: 'Dr. Ramesh Kumar', subject: 'Physics', department: 'Head of Sciences' },
+    { id: 'fac-3', name: 'Mr. Daniel J.', subject: 'Computer Science', department: 'AI & Robotics Lab' },
+    { id: 'fac-4', name: 'Dr. Savitha Sharma', subject: 'Chemistry', department: 'Senior Faculty' },
+    { id: 'fac-5', name: 'Prof. Anjali Verma', subject: 'English & Humanities', department: 'Language Faculty' },
+  ];
+}
 
 export function getSession(): UserSession | null {
   try {

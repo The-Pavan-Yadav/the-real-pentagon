@@ -160,7 +160,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
-      if (hash === 'home') setView('home');
+      if (hash === 'home' || hash === 'aicam' || hash === 'ai-cam') setView('home');
       else if (hash === 'login') setView('login');
       else if (hash === 'signup') setView('signup');
       else if (hash === 'student-dashboard' || hash === 'dashboard' || hash === 'projects') setView('student-dashboard');
@@ -186,6 +186,11 @@ export const App: React.FC = () => {
       {/* Screen Views */}
       {view === 'home' && (
         <HomePage
+          initialAiCamOpen={
+            typeof window !== 'undefined' &&
+            (window.location.hash.replace('#', '') === 'aicam' ||
+              window.location.hash.replace('#', '') === 'ai-cam')
+          }
           onNavigateAuth={(role, isSignup) => {
             setAuthRole(role);
             navigateTo(isSignup ? 'signup' : 'login', role);

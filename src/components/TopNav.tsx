@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 interface TopNavProps {
   onOpenDemo: () => void;
   onNavigate: (path: string) => void;
+  onOpenAiCam?: () => void;
 }
 
-export const TopNav: React.FC<TopNavProps> = ({ onOpenDemo, onNavigate }) => {
+export const TopNav: React.FC<TopNavProps> = ({ onOpenDemo, onNavigate, onOpenAiCam }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -70,6 +71,26 @@ export const TopNav: React.FC<TopNavProps> = ({ onOpenDemo, onNavigate }) => {
         >
           Support
         </a>
+
+        {/* AI Cam Button */}
+        {onOpenAiCam && (
+          <button
+            className="nav-aicam-btn"
+            id="nav-open-aicam"
+            type="button"
+            onClick={onOpenAiCam}
+            title="Launch The Pentagon AI Cam"
+            aria-label="Launch Pentagon AI Cam"
+          >
+            <span className="aicam-pulse-dot" />
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+              <circle cx="12" cy="13" r="4" />
+            </svg>
+            <span>AI Cam</span>
+          </button>
+        )}
+
         <button
           className="nav-cta"
           id="open-demo"
